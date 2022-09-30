@@ -5,7 +5,7 @@ import { StarIcon } from "@heroicons/react/outline";
 
 const Header = () => {
   return (
-    <div className="flex px-4 py-2 bg-white shadow-sm">
+    <div className="sticky top-0 z-50 flex px-4 py-2 bg-white shadow-sm">
       <div className="relative flex-shrink-0 w-20 h-10 cursor-pointer">
         <Image objectFit="contain" src="/logo.jpeg" layout="fill" />
       </div>
