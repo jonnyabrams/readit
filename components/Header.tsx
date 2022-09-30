@@ -53,6 +53,12 @@ const Header = () => {
       <div className="flex items-center ml-5 lg:hidden">
         <MenuIcon className="icon" />
       </div>
+
+      <div className="items-center hidden p-2 space-x-2 border-gray-100 cursor-pointer lg:flex">
+        <div className="relative flex-shrink-0 w-5 h-5">
+          <Image src="/login.webp" alt="" layout="fill" />
+        </div>
+      </div>
     </div>
   );
 };
