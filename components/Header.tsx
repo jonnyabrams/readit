@@ -10,9 +10,9 @@ const Header = () => {
         <Image objectFit="contain" src="/logo.jpeg" layout="fill" />
       </div>
 
-      <div className="flex items-center mx-7">
+      <div className="flex items-center mx-7 xl:min-w-[300px]">
         <HomeIcon className="w-5 h-5" />
-        <p>Home</p>
+        <p className="flex-1 hidden ml-2 lg:inline">Home</p>
         <ChevronDownIcon className="w-5 h-5" />
       </div>
     </div>
