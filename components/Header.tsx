@@ -49,6 +49,10 @@ const Header = () => {
         <PlusIcon className="icon" />
         <SpeakerphoneIcon className="icon" />
       </div>
+
+      <div className="flex items-center ml-5 lg:hidden">
+        <MenuIcon className="icon" />
+      </div>
     </div>
   );
 };
