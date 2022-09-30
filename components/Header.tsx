@@ -39,7 +39,7 @@ const Header = () => {
         <button type="submit" hidden />
       </form>
 
-      <div className="flex">
+      <div className="flex items-center hidden mx-5 space-x-2 text-gray-500 lg:inline-flex">
         <SparklesIcon className="icon" />
         <GlobeIcon className="icon" />
         <VideoCameraIcon className="icon" />
