@@ -14,7 +14,7 @@ import {
   SpeakerphoneIcon,
   VideoCameraIcon,
 } from "@heroicons/react/outline";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -56,15 +56,33 @@ const Header = () => {
       </div>
 
       {/* sign in/sign out button */}
-      <div
-        onClick={() => signIn()}
-        className="items-center hidden p-2 space-x-2 border-gray-100 cursor-pointer lg:flex"
-      >
-        <div className="relative flex-shrink-0 w-5 h-5">
-          <Image objectFit="contain" src="/login.webp" alt="" layout="fill" />
+      {session ? (
+        <div
+          onClick={() => signOut()}
+          className="items-center hidden p-2 space-x-2 border-gray-100 cursor-pointer lg:flex"
+        >
+          <div className="relative flex-shrink-0 w-5 h-5">
+            <Image objectFit="contain" src="/login.webp" alt="" layout="fill" />
+          </div>
+
+          <div className="flex-1 text-xs">
+            <p className="truncate">{session?.user?.name}</p>
+            <p className="text-gray-400">1 karma</p>
+          </div>
+
+          <ChevronDownIcon className="flex-shrink-0 h-5 text-gray-400" />
         </div>
-        <p className="text-gray-400">Sign In</p>
-      </div>
+      ) : (
+        <div
+          onClick={() => signIn()}
+          className="items-center hidden p-2 space-x-2 border-gray-100 cursor-pointer lg:flex"
+        >
+          <div className="relative flex-shrink-0 w-5 h-5">
+            <Image objectFit="contain" src="/login.webp" alt="" layout="fill" />
+          </div>
+          <p className="text-gray-400">Sign In</p>
+        </div>
+      )}
     </div>
   );
 };
