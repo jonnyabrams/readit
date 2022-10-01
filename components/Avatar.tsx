@@ -11,7 +11,7 @@ const Avatar = ({ seed, large }: Props) => {
 
   return (
     <div
-      className={`relative w-10 h-10 bg-white border-gray-300 rounded-full ${
+      className={`relative overflow-hidden w-10 h-10 bg-white border-gray-300 rounded-full ${
         large && "h-20 w-20"
       }`}
     >
