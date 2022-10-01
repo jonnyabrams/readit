@@ -10,8 +10,6 @@ const Home: NextPage = () => {
         <title>Readit</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      <Header />
     </div>
   );
 };
