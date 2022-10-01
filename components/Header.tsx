@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import {
   HomeIcon,
   ChevronDownIcon,
@@ -15,6 +14,7 @@ import {
   SpeakerphoneIcon,
   VideoCameraIcon,
 } from "@heroicons/react/outline";
+import { signIn } from "next-auth/react";
 
 const Header = () => {
   return (
@@ -54,7 +54,11 @@ const Header = () => {
         <MenuIcon className="icon" />
       </div>
 
-      <div className="items-center hidden p-2 space-x-2 border-gray-100 cursor-pointer lg:flex">
+      {/* sign in/sign out button */}
+      <div
+        onClick={() => signIn()}
+        className="items-center hidden p-2 space-x-2 border-gray-100 cursor-pointer lg:flex"
+      >
         <div className="relative flex-shrink-0 w-5 h-5">
           <Image objectFit="contain" src="/login.webp" alt="" layout="fill" />
         </div>
