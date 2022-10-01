@@ -5,7 +5,7 @@ const PostBox = () => {
   const { data: session } = useSession();
 
   return (
-    <form>
+    <form className="sticky z-50 p-2 bg-white border border-gray-300 rounded-md top-16">
       <div className="flex items-center space-x-3">
         <Avatar />
         <input
