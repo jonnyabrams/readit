@@ -166,7 +166,6 @@ type Mutation {
     )
   insertPost(
     image: String!
-    created_at: DateTime!
     body: String!
     subreadit_id: ID!
     title: String!
