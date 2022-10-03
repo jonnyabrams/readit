@@ -106,6 +106,15 @@ type Query {
       table: "subreadit"
       configuration: "postgresql_config"
     )
+  getSubreaditListByTopic(topic: String!): [Subreadit]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      select * from "subreadit" where topic = $1
+      """
+      configuration: "postgresql_config"
+    )
   getSubreadit(id: ID!): Subreadit
     @dbquery(
       type: "postgresql"

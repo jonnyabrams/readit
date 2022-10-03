@@ -29,6 +29,12 @@ const PostBox = () => {
 
   const onSubmit = handleSubmit(async (formData) => {
     console.log(formData);
+
+    try {
+      
+    } catch (error) {
+      
+    }
   });
 
   return (
