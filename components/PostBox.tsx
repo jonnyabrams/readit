@@ -85,11 +85,20 @@ const PostBox = () => {
               {errors.postTitle?.type === "required" && (
                 <p>A post title is required</p>
               )}
-              
+
               {errors.subreadit?.type === "required" && (
                 <p>A subreadit is required</p>
               )}
             </div>
+          )}
+
+          {!!watch("postTitle") && (
+            <button
+              type="submit"
+              className="w-full p-2 text-white bg-blue-400 rounded-full"
+            >
+              Create Post
+            </button>
           )}
         </div>
       )}
