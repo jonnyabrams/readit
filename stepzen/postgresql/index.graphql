@@ -13,19 +13,27 @@ type Comment {
 
 type Post {
   body: String
-  commentList: [Comment] @materializer(query: "getCommentUsingPost_id")
   created_at: DateTime
   id: ID!
   image: String
-  subreadit: Subreadit
+  subreadit: [Subreadit]
     @materializer(
-      query: "getSubreadit"
+      query: "getSubreaditListById"
       arguments: [{ name: "id", field: "subreadit_id" }]
     )
   subreadit_id: ID
   title: String
   username: String
-  voteList: [Vote] @materializer(query: "getVoteUsingPost_id")
+  votes: [Vote]
+    @materializer(
+      query: "getVoteUsingPost_id"
+      arguments: [{ name: "post_id", field: "id" }]
+    )
+  comments: [Comment]
+    @materializer(
+      query: "getCommentUsingPost_id"
+      arguments: [{ name: "post_id", field: "id" }]
+    )
 }
 
 type Subreadit {
@@ -79,23 +87,20 @@ type Query {
       table: "post"
       configuration: "postgresql_config"
     )
-  getCommentUsingPost_id(id: ID!): [Comment]
+  getCommentUsingPost_id(post_id: ID!): [Comment]
     @dbquery(
       type: "postgresql"
       query: """
-      SELECT T."created_at", T."id", T."post_id", T."text", T."username"
-        FROM "public"."comment" T
-        WHERE T."post_id" = $1
+      select * from "comment" where "post_id" = $1
       """
       configuration: "postgresql_config"
     )
-  getVoteUsingPost_id(id: ID!): [Vote]
+  getVoteUsingPost_id(post_id: ID!): [Vote]
     @dbquery(
       type: "postgresql"
       query: """
-      SELECT T."created_at", T."id", T."post_id", T."upvote"
-        FROM "public"."vote" T
-        WHERE T."post_id" = $1
+      select * from "vote" where "post_id" = $1
+      order by "created_at" desc
       """
       configuration: "postgresql_config"
     )
@@ -120,6 +125,14 @@ type Query {
       type: "postgresql"
       schema: "public"
       table: "subreadit"
+      configuration: "postgresql_config"
+    )
+  getSubreaditListById(id: ID!): [Subreadit]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select * from "subreadit" where "id" = $1
+      """
       configuration: "postgresql_config"
     )
   getPostUsingSubreadit_id(id: ID!): [Post]
