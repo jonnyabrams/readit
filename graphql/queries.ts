@@ -8,4 +8,4 @@ export const GET_SUBREADIT_BY_TOPIC = gql`
       created_at
     }
   }
-`
+`;

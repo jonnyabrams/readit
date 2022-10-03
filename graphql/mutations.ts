@@ -9,11 +9,11 @@ export const ADD_POST = gql`
     $username: String!
   ) {
     insertPost(
-      $body: $body
-      $image: $image
-      $subreadit_id: $$subreadit_id
-      $title: $title
-      $username: $username
+      body: $body
+      image: $image
+      subreadit_id: $subreadit_id
+      title: $title
+      username: $username
     ) {
       body 
       created_at 

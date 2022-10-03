@@ -3,6 +3,7 @@ import { LinkIcon, PhotographIcon } from "@heroicons/react/outline";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
+import toast from "react-hot-toast";
 
 import Avatar from "./Avatar";
 import { ADD_POST, ADD_SUBREADIT } from "../graphql/mutations";
@@ -31,6 +32,8 @@ const PostBox = () => {
   } = useForm<FormData>();
 
   const onSubmit = handleSubmit(async (formData) => {
+    const notification = toast.loading("Creating new post...");
+
     try {
       // query for the subreadit topic
       const {
@@ -95,8 +98,20 @@ const PostBox = () => {
         console.log("New post added:", newPost);
       }
 
-      
-    } catch (error) {}
+      // Now reset fields
+      setValue("postBody", "");
+      setValue("postImage", "");
+      setValue("postTitle", "");
+      setValue("subreadit", "");
+
+      toast.success("New post created!", {
+        id: notification,
+      });
+    } catch (error) {
+      toast.error("Something went wrong!", {
+        id: notification,
+      });
+    }
   });
 
   return (
