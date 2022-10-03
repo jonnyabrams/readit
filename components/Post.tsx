@@ -31,7 +31,10 @@ const Post = ({ post }: Props) => {
         <div className="flex items-center space-x-2">
           <Avatar seed={post.subreadit[0]?.topic} />
           <p className="text-xs text-gray-400">
-            <span className="font-bold text-black hover:text-blue-400 hover:underline">r/{post.subreadit[0]?.topic}</span> · Posted by u/
+            <span className="font-bold text-black hover:text-blue-400 hover:underline">
+              r/{post.subreadit[0]?.topic}
+            </span>{" "}
+            · Posted by u/
             {post.username} <TimeAgo date={post.created_at} />
           </p>
         </div>
@@ -43,8 +46,30 @@ const Post = ({ post }: Props) => {
         </div>
 
         {/* Image  */}
+        <img className="w-full" src={post.image} alt="" />
 
         {/* Footer */}
+        <div className="flex space-x-4 text-gray-400">
+          <div className="postButtons">
+            <ChatAltIcon className="w-6 h-6" />
+            <p className="">{post.comments.length} comments</p>
+          </div>
+          <div className="postButtons">
+            <GiftIcon className="w-6 h-6" />
+            <p className="hidden sm:inline">Award</p>
+          </div>
+          <div className="postButtons">
+            <ShareIcon className="w-6 h-6" />
+            <p className="hidden sm:inline">Share</p>
+          </div>
+          <div className="postButtons">
+            <BookmarkIcon className="w-6 h-6" />
+            <p className="hidden sm:inline">Save</p>
+          </div>
+          <div className="postButtons">
+            <DotsHorizontalIcon className="w-6 h-6" />
+          </div>
+        </div>
       </div>
     </div>
   );
