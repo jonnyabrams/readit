@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import Avatar from "./Avatar";
 import { ADD_POST, ADD_SUBREADIT } from "../graphql/mutations";
 import client from "../apollo-client";
-import { GET_SUBREADIT_BY_TOPIC } from "../graphql/queries";
+import { GET_ALL_POSTS, GET_SUBREADIT_BY_TOPIC } from "../graphql/queries";
 
 type FormData = {
   postTitle: string;
@@ -19,7 +19,9 @@ type FormData = {
 
 const PostBox = () => {
   const { data: session } = useSession();
-  const [addPost] = useMutation(ADD_POST);
+  const [addPost] = useMutation(ADD_POST, {
+    refetchQueries: [GET_ALL_POSTS, "getPostList"],
+  });
   const [addSubreadit] = useMutation(ADD_SUBREADIT);
 
   const [imageBoxOpen, setImageBoxOpen] = useState(false);
