@@ -19,7 +19,7 @@ type FormData = {
 const PostBox = () => {
   const { data: session } = useSession();
   const [addPost] = useMutation(ADD_POST);
-  const [addSubreadit] = useMutation(ADD_SUBREADIT)
+  const [addSubreadit] = useMutation(ADD_SUBREADIT);
 
   const [imageBoxOpen, setImageBoxOpen] = useState(false);
   const {
@@ -31,8 +31,6 @@ const PostBox = () => {
   } = useForm<FormData>();
 
   const onSubmit = handleSubmit(async (formData) => {
-    console.log(formData);
-
     try {
       // query for the subreadit topic
       const {
@@ -45,9 +43,37 @@ const PostBox = () => {
       });
 
       const subreaditExists = getSubreaditListByTopic.length > 0;
-      
+
       if (!subreaditExists) {
         // create this subreadit
+        console.log("Subreddit is new! -> creating a new subreadit!");
+
+        const {
+          data: { insertSubreadit: newSubreadit },
+        } = await addSubreadit({
+          variables: {
+            topic: formData.subreadit,
+          },
+        });
+
+        console.log("Creating post...", formData);
+
+        // make img an empty string because undefined image can throw an error
+        const image = formData.postImage || "";
+
+        const {
+          data: { insertPost: newPost },
+        } = await addPost({
+          variables: {
+            body: formData.postBody,
+            image: image,
+            subreadit_id: newSubreadit.id,
+            title: formData.postTitle,
+            username: session?.user?.name,
+          },
+        });
+
+        console.log("New post added:", newPost);
       } else {
         // use existing subreadit
       }
