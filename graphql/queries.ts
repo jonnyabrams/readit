@@ -27,12 +27,10 @@ export const GET_ALL_POSTS = gql`
         id
         post_id
         upvote
-        username
       }
     }
   }
-
-`
+`;
 
 export const GET_SUBREADIT_BY_TOPIC = gql`
   query MyQuery($topic: String!) {

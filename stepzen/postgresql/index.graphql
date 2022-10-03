@@ -26,7 +26,7 @@ type Post {
   username: String
   votes: [Vote]
     @materializer(
-      query: "getVoteUsingPost_id"
+      query: "getVotesByPostId"
       arguments: [{ name: "post_id", field: "id" }]
     )
   comments: [Comment]
@@ -95,7 +95,7 @@ type Query {
       """
       configuration: "postgresql_config"
     )
-  getVoteUsingPost_id(post_id: ID!): [Vote]
+  getVotesByPostId(post_id: ID!): [Vote]
     @dbquery(
       type: "postgresql"
       query: """

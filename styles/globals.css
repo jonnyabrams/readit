@@ -4,6 +4,10 @@
 
 @layer components {
   .icon {
-    @apply h-9 w-6 lg:w-9 cursor-pointer rounded-sm lg:p-1 lg:hover:bg-gray-100
+    @apply w-6 rounded-sm cursor-pointer h-9 lg:w-9 lg:p-1 lg:hover:bg-gray-100;
+  }
+
+  .voteButtons {
+    @apply w-6 h-6 p-1 rounded-md hover:bg-gray-200;
   }
 }
