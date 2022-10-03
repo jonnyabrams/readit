@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import { LinkIcon, PhotographIcon } from "@heroicons/react/outline";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 import Avatar from "./Avatar";
 
@@ -13,6 +14,7 @@ type FormData = {
 
 const PostBox = () => {
   const { data: session } = useSession();
+  const [imageBoxOpen, setImageBoxOpen] = useState(false);
   const {
     register,
     setValue,
@@ -35,7 +37,10 @@ const PostBox = () => {
           }
         />
 
-        <PhotographIcon className={`h-6 text-gray-300 cursor-pointer`} />
+        <PhotographIcon
+          onClick={() => setImageBoxOpen(!imageBoxOpen)}
+          className={`h-6 text-gray-300 cursor-pointer ${imageBoxOpen && 'text-blue-300'}`}
+        />
         <LinkIcon className="h-6 text-gray-300" />
       </div>
 
@@ -50,7 +55,7 @@ const PostBox = () => {
               placeholder="Text (optional)"
             />
           </div>
-          
+
           <div className="flex items-center px-2">
             <p className="min-w-[90px]">Subreadit:</p>
             <input
@@ -60,6 +65,18 @@ const PostBox = () => {
               placeholder="eg. Everton FC"
             />
           </div>
+
+          {imageBoxOpen && (
+            <div className="flex items-center px-2">
+            <p className="min-w-[90px]">Image URL:</p>
+            <input
+              className="flex-1 p-2 m-2 outline-none bg-blue-50"
+              {...register("postImage")}
+              type="text"
+              placeholder="Optional..."
+            />
+          </div>
+          )}
         </div>
       )}
     </form>
