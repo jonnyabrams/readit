@@ -187,6 +187,14 @@ type Mutation {
       dml: INSERT
       configuration: "postgresql_config"
     )
+  insertSubreadit(topic: String!): Subreadit
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "subreadit"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
   deletePost(id: ID!): Post
     @dbquery(
       type: "postgresql"
@@ -195,14 +203,14 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
-  insertSubreadit(created_at: DateTime!, topic: String!): Subreadit
-    @dbquery(
-      type: "postgresql"
-      schema: "public"
-      table: "subreadit"
-      dml: INSERT
-      configuration: "postgresql_config"
-    )
+  # insertSubreadit(created_at: DateTime!, topic: String!): Subreadit
+  #   @dbquery(
+  #     type: "postgresql"
+  #     schema: "public"
+  #     table: "subreadit"
+  #     dml: INSERT
+  #     configuration: "postgresql_config"
+  #   )
   deleteSubreadit(id: ID!): Subreadit
     @dbquery(
       type: "postgresql"

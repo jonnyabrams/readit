@@ -5,7 +5,9 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 
 import Avatar from "./Avatar";
-import { ADD_POST } from "../graphql/mutations";
+import { ADD_POST, ADD_SUBREADIT } from "../graphql/mutations";
+import client from "../apollo-client";
+import { GET_SUBREADIT_BY_TOPIC } from "../graphql/queries";
 
 type FormData = {
   postTitle: string;
@@ -16,7 +18,8 @@ type FormData = {
 
 const PostBox = () => {
   const { data: session } = useSession();
-  const [addPost, ] = useMutation(ADD_POST)
+  const [addPost] = useMutation(ADD_POST);
+  const [addSubreadit] = useMutation(ADD_SUBREADIT)
 
   const [imageBoxOpen, setImageBoxOpen] = useState(false);
   const {
@@ -31,10 +34,24 @@ const PostBox = () => {
     console.log(formData);
 
     try {
+      // query for the subreadit topic
+      const {
+        data: { getSubreaditListByTopic },
+      } = await client.query({
+        query: GET_SUBREADIT_BY_TOPIC,
+        variables: {
+          topic: formData.subreadit,
+        },
+      });
+
+      const subreaditExists = getSubreaditListByTopic.length > 0;
       
-    } catch (error) {
-      
-    }
+      if (!subreaditExists) {
+        // create this subreadit
+      } else {
+        // use existing subreadit
+      }
+    } catch (error) {}
   });
 
   return (
