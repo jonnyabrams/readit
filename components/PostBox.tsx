@@ -90,11 +90,11 @@ const PostBox = () => {
           {Object.keys(errors).length > 0 && (
             <div className="p-2 space-y-2 text-red-500">
               {errors.postTitle?.type === "required" && (
-                <p>A post title is required</p>
+                <p>- A post title is required</p>
               )}
 
               {errors.subreadit?.type === "required" && (
-                <p>A subreadit is required</p>
+                <p>- A subreadit is required</p>
               )}
             </div>
           )}
