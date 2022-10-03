@@ -1,8 +1,15 @@
+import { useQuery } from "@apollo/client";
+
+import { GET_ALL_POSTS } from "../graphql/queries";
 
 const Feed = () => {
-  return (
-    <div>Feed</div>
-  )
-}
+  const { data, error } = useQuery(GET_ALL_POSTS);
 
-export default Feed
+  const posts = data
+
+  return <div>
+    Hello
+  </div>;
+};
+
+export default Feed;
