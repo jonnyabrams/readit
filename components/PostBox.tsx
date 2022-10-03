@@ -39,7 +39,9 @@ const PostBox = () => {
 
         <PhotographIcon
           onClick={() => setImageBoxOpen(!imageBoxOpen)}
-          className={`h-6 text-gray-300 cursor-pointer ${imageBoxOpen && 'text-blue-300'}`}
+          className={`h-6 text-gray-300 cursor-pointer ${
+            imageBoxOpen && "text-blue-300"
+          }`}
         />
         <LinkIcon className="h-6 text-gray-300" />
       </div>
@@ -60,7 +62,7 @@ const PostBox = () => {
             <p className="min-w-[90px]">Subreadit:</p>
             <input
               className="flex-1 p-2 m-2 outline-none bg-blue-50"
-              {...register("subreadit")}
+              {...register("subreadit", { required: true })}
               type="text"
               placeholder="eg. Everton FC"
             />
@@ -68,14 +70,26 @@ const PostBox = () => {
 
           {imageBoxOpen && (
             <div className="flex items-center px-2">
-            <p className="min-w-[90px]">Image URL:</p>
-            <input
-              className="flex-1 p-2 m-2 outline-none bg-blue-50"
-              {...register("postImage")}
-              type="text"
-              placeholder="Optional..."
-            />
-          </div>
+              <p className="min-w-[90px]">Image URL:</p>
+              <input
+                className="flex-1 p-2 m-2 outline-none bg-blue-50"
+                {...register("postImage")}
+                type="text"
+                placeholder="Optional..."
+              />
+            </div>
+          )}
+
+          {Object.keys(errors).length > 0 && (
+            <div className="p-2 space-y-2 text-red-500">
+              {errors.postTitle?.type === "required" && (
+                <p>A post title is required</p>
+              )}
+              
+              {errors.subreadit?.type === "required" && (
+                <p>A subreadit is required</p>
+              )}
+            </div>
           )}
         </div>
       )}
