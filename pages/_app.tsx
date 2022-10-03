@@ -6,6 +6,7 @@ import { ApolloProvider } from "@apollo/client";
 import client from '../apollo-client'
 import "../styles/globals.css";
 import Header from "../components/Header";
+import { Toaster } from "react-hot-toast";
 
 const MyApp = ({
   Component,
@@ -16,6 +17,7 @@ const MyApp = ({
   return (
     <ApolloProvider client={client}>
       <SessionProvider session={pageProps.session}>
+        <Toaster />
         <div className="h-screen overflow-y-scroll bg-slate-200">
           <Header />
           <Component {...pageProps} />
