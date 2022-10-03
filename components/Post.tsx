@@ -8,6 +8,8 @@ import {
   GiftIcon,
   ShareIcon,
 } from "@heroicons/react/outline";
+import TimeAgo from "react-timeago";
+
 import Avatar from "./Avatar";
 
 type Props = {
@@ -26,10 +28,11 @@ const Post = ({ post }: Props) => {
 
       <div className="p-3 pb-1">
         {/* Header  */}
-        <div>
+        <div className="flex items-center space-x-2">
           <Avatar seed={post.subreadit[0]?.topic} />
-          <p>
-            <span>r/{post.subreadit[0]?.topic}</span>
+          <p className="text-xs text-gray-400">
+            <span className="font-bold text-black hover:text-blue-400 hover:underline">r/{post.subreadit[0]?.topic}</span> · Posted by u/
+            {post.username} <TimeAgo date={post.created_at} />
           </p>
         </div>
 
