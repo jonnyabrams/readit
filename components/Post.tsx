@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/outline";
 import TimeAgo from "react-timeago";
 import Link from "next/link";
+import { Jelly } from "@uiball/loaders";
 
 import Avatar from "./Avatar";
 
@@ -18,6 +19,12 @@ type Props = {
 };
 
 const Post = ({ post }: Props) => {
+  // this is an alternative to server-side rendering
+  if (!post) return (
+    <div className="flex items-center justify-center w-full p-10 text-xl">
+    <Jelly size={50} color="#FF4501" />
+    </div>
+  )
   return (
     <Link href={`/post/${post.id}`}>
       <div className="flex bg-white border border-gray-300 rounded-md shadow-sm cursor-pointer hover:border hover:border-gray-600">
@@ -37,8 +44,8 @@ const Post = ({ post }: Props) => {
                 <span className="font-bold text-black hover:text-blue-400 hover:underline">
                   r/{post.subreadit[0]?.topic}
                 </span>
-              </Link>
-              {" "}· Posted by u/
+              </Link>{" "}
+              · Posted by u/
               {post.username} <TimeAgo date={post.created_at} />
             </p>
           </div>
