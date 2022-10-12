@@ -1,9 +1,14 @@
 import { useQuery } from "@apollo/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 import Post from "../../components/Post";
 import { GET_POST_BY_POST_ID } from "../../graphql/queries";
+
+type FormData = {
+  comment: string;
+};
 
 const PostPage = () => {
   const router = useRouter();
@@ -16,6 +21,16 @@ const PostPage = () => {
 
   const post: Post = data?.getPost;
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {console.log(data)};
+
   return (
     <div className="max-w-5xl mx-auto my-7">
       <Post post={post} />
@@ -25,8 +40,12 @@ const PostPage = () => {
           Comment as <span className="text-red-500">{session?.user?.name}</span>
         </p>
 
-        <form className="flex flex-col space-y-2">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col space-y-2"
+        >
           <textarea
+            {...register("comment")}
             disabled={!session}
             className="h-24 p-2 pl-4 border border-gray-200 rounded-md outline-none disabled:bg-gray-50"
             placeholder={
