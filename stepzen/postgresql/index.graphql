@@ -89,7 +89,7 @@ type Query {
       schema: "public"
       query: """
       select *, "post".id as id from "post"
-      join "subreadit" on "subreadit".id = "post"."subreadit_id"
+      join "subreadit" on "subreadit"."id" = "post"."subreadit_id"
       where "subreadit"."topic" = $1
       order by "post"."created_at" desc
       """
