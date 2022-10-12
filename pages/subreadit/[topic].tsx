@@ -27,7 +27,7 @@ const Subreadit = () => {
 
       <div className="pb-10 mx-auto mt-5 max-width-5xl">
         <PostBox subreadit={topic as string} />
-        <Feed />
+        <Feed topic={topic as string} />
       </div>
     </div>
   );
