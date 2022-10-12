@@ -17,7 +17,11 @@ type FormData = {
   subreadit: string;
 };
 
-const PostBox = () => {
+type Props = {
+  subreadit?: string;
+};
+
+const PostBox = ({ subreadit }: Props) => {
   const { data: session } = useSession();
   const [addPost] = useMutation(ADD_POST, {
     refetchQueries: [GET_ALL_POSTS, "getPostList"],
