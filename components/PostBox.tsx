@@ -47,7 +47,7 @@ const PostBox = ({ subreadit }: Props) => {
       } = await client.query({
         query: GET_SUBREADIT_BY_TOPIC,
         variables: {
-          topic: formData.subreadit,
+          topic: subreadit || formData.subreadit,
         },
       });
 
@@ -133,7 +133,11 @@ const PostBox = ({ subreadit }: Props) => {
           className="flex-1 p-2 pl-5 rounded-md outline-none bg-gray-50"
           type="text"
           placeholder={
-            session ? "Create a post by entering a title!" : "Sign in to post"
+            session
+              ? subreadit
+                ? `Create a post in r/${subreadit}`
+                : "Create a post by entering a title!"
+              : "Sign in to post"
           }
         />
 
@@ -158,15 +162,17 @@ const PostBox = ({ subreadit }: Props) => {
             />
           </div>
 
-          <div className="flex items-center px-2">
-            <p className="min-w-[90px]">Subreadit:</p>
-            <input
-              className="flex-1 p-2 m-2 outline-none bg-blue-50"
-              {...register("subreadit", { required: true })}
-              type="text"
-              placeholder="eg. Everton FC"
-            />
-          </div>
+          {!subreadit && (
+            <div className="flex items-center px-2">
+              <p className="min-w-[90px]">Subreadit:</p>
+              <input
+                className="flex-1 p-2 m-2 outline-none bg-blue-50"
+                {...register("subreadit", { required: true })}
+                type="text"
+                placeholder="eg. Everton FC"
+              />
+            </div>
+          )}
 
           {imageBoxOpen && (
             <div className="flex items-center px-2">
