@@ -15,13 +15,13 @@ export const ADD_POST = gql`
       title: $title
       username: $username
     ) {
-      body
-      created_at
-      id
-      image
-      subreadit_id
-      title
-      username
+      body 
+      created_at 
+      id 
+      image 
+      subreadit_id 
+      title 
+      username 
     }
   }
 `;
@@ -36,7 +36,7 @@ export const ADD_COMMENT = gql`
       username
     }
   }
-`;
+`
 
 export const ADD_SUBREADIT = gql`
   mutation MyMutation($topic: String!) {
@@ -46,4 +46,4 @@ export const ADD_SUBREADIT = gql`
       created_at
     }
   }
-`;
+`

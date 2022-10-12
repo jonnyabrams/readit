@@ -1,9 +1,11 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 import Post from "../../components/Post";
+import { ADD_COMMENT } from "../../graphql/mutations";
 import { GET_POST_BY_POST_ID } from "../../graphql/queries";
 
 type FormData = {
@@ -13,6 +15,10 @@ type FormData = {
 const PostPage = () => {
   const router = useRouter();
   const { data: session } = useSession();
+  const [addComment] = useMutation(ADD_COMMENT, {
+    refetchQueries: [GET_POST_BY_POST_ID, "getPost"],
+  });
+
   const { data } = useQuery(GET_POST_BY_POST_ID, {
     variables: {
       id: router.query.postId,
@@ -30,9 +36,24 @@ const PostPage = () => {
   } = useForm<FormData>();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log(data);
+    const notification = toast.loading("Posting your comment...");
+
+    await addComment({
+      variables: {
+        post_id: router.query.postId,
+        username: session?.user?.name,
+        text: data.comment,
+      },
+    });
+
+    setValue("comment", "");
+
+    toast.success("Comment successfully posted!", {
+      id: notification,
+    });
   };
 
+  console.log(data);
   return (
     <div className="max-w-5xl mx-auto my-7">
       <Post post={post} />
