@@ -20,11 +20,13 @@ type Props = {
 
 const Post = ({ post }: Props) => {
   // this is an alternative to server-side rendering
-  if (!post) return (
-    <div className="flex items-center justify-center w-full p-10 text-xl">
-    <Jelly size={50} color="#FF4501" />
-    </div>
-  )
+  if (!post)
+    return (
+      <div className="flex items-center justify-center w-full p-10 text-xl">
+        <Jelly size={50} color="#FF4501" />
+      </div>
+    );
+    
   return (
     <Link href={`/post/${post.id}`}>
       <div className="flex bg-white border border-gray-300 rounded-md shadow-sm cursor-pointer hover:border hover:border-gray-600">

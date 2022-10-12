@@ -65,8 +65,8 @@ export const GET_ALL_POSTS_BY_TOPIC = gql`
 `;
 
 export const GET_POST_BY_POST_ID = gql`
-  query MyQuery($post_id: ID!) {
-    getPostListByPostId(topic: $topic) {
+  query MyQuery($id: ID!) {
+    getPost(id: $id) {
       body
       created_at
       id
