@@ -29,7 +29,9 @@ const PostPage = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {console.log(data)};
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    console.log(data);
+  };
 
   return (
     <div className="max-w-5xl mx-auto my-7">
