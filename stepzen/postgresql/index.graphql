@@ -53,6 +53,7 @@ type Vote {
     )
   post_id: ID
   upvote: Boolean
+  username: String
 }
 
 """
@@ -217,6 +218,13 @@ type Mutation {
       dml: INSERT
       configuration: "postgresql_config"
     )
+  insertVote(post_id: ID!, username: String!, upvote: Boolean!): Vote
+    @dbquery(
+      type: "postgresql"
+      table: "vote"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
   deletePost(id: ID!): Post
     @dbquery(
       type: "postgresql"
@@ -241,14 +249,7 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
-  insertVote(created_at: DateTime!, post_id: ID!, upvote: Boolean!): Vote
-    @dbquery(
-      type: "postgresql"
-      schema: "public"
-      table: "vote"
-      dml: INSERT
-      configuration: "postgresql_config"
-    )
+
   deleteVote(id: ID!): Vote
     @dbquery(
       type: "postgresql"

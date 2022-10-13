@@ -15,13 +15,13 @@ export const ADD_POST = gql`
       title: $title
       username: $username
     ) {
-      body 
-      created_at 
-      id 
-      image 
-      subreadit_id 
-      title 
-      username 
+      body
+      created_at
+      id
+      image
+      subreadit_id
+      title
+      username
     }
   }
 `;
@@ -36,7 +36,19 @@ export const ADD_COMMENT = gql`
       username
     }
   }
-`
+`;
+
+export const ADD_VOTE = gql`
+  mutation MyMutation($post_id: ID!, $username: String!, $upvote: Boolean!) {
+    insertVote(post_id: $post_id, username: $username, upvote: $upvote) {
+      id
+      created_at
+      post_id
+      upvote
+      username
+    }
+  }
+`;
 
 export const ADD_SUBREADIT = gql`
   mutation MyMutation($topic: String!) {
@@ -46,4 +58,4 @@ export const ADD_SUBREADIT = gql`
       created_at
     }
   }
-`
+`;
