@@ -3,10 +3,13 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import TimeAgo from "react-timeago";
+import Avatar from "../../components/Avatar";
 
 import Post from "../../components/Post";
 import { ADD_COMMENT } from "../../graphql/mutations";
 import { GET_POST_BY_POST_ID } from "../../graphql/queries";
+import { Comment, Post as PostType } from "../../typings";
 
 type FormData = {
   comment: string;
@@ -25,7 +28,7 @@ const PostPage = () => {
     },
   });
 
-  const post: Post = data?.getPost;
+  const post: PostType = data?.getPost;
 
   const {
     register,
@@ -53,7 +56,6 @@ const PostPage = () => {
     });
   };
 
-  console.log(data);
   return (
     <div className="max-w-5xl mx-auto my-7">
       <Post post={post} />
@@ -83,6 +85,27 @@ const PostPage = () => {
             Comment
           </button>
         </form>
+      </div>
+
+      <div className="px-10 py-5 -my-5 bg-white border border-t-0 border-gray-300 rounded-b-md">
+        <hr className="py-2" />
+
+        {post?.comments.map((comment: Comment) => (
+          <div className="relative flex items-center space-x-2 space-y-5" key={comment.id}>
+            <hr className="absolute z-0 h-16 border top-10 left-7" />
+            <div className="z-50">
+              <Avatar seed={comment.username} />
+            </div>
+
+            <div className="flex flex-col">
+              <p className="py-2 text-xs text-gray-400">
+                <span className="font-semibold text-gray-600">{comment.username}</span> ·{" "}
+                <TimeAgo date={comment.created_at} />
+              </p>
+              <p>{comment.text}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
