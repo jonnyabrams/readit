@@ -1,7 +1,8 @@
 import { useQuery } from "@apollo/client";
 
 import { GET_ALL_POSTS, GET_ALL_POSTS_BY_TOPIC } from "../graphql/queries";
-import Post from "./Post";
+import PostComponent from "./Post";
+import Post from "../typings"
 
 type Props = {
   topic?: string;
@@ -21,7 +22,7 @@ const Feed = ({ topic }: Props) => {
   return (
     <div className="mt-5 space-y-4">
       {posts?.map((post) => (
-        <Post key={post.id} post={post} />
+        <PostComponent key={post.id} post={post} />
       ))}
     </div>
   );
