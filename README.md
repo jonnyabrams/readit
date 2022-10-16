@@ -8,7 +8,7 @@ Users can sign in with their Reddit account and post to a particular subreddit (
 
 They can also leave comments on posts as well as give upvotes and downvotes.
 
-With more time, I would have liked to put the nav bar's home icon drop down, search bar and menu icon to use. As things are, they're just there to replicate Reddit's UI.
+With more time, I would have liked to put the nav bar's home dropdown, search bar and menu icon to use. As things are, they're just there to replicate Reddit's UI.
 
 ## Video Demo
 
