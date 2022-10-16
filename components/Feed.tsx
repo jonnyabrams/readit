@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 
 import { GET_ALL_POSTS, GET_ALL_POSTS_BY_TOPIC } from "../graphql/queries";
 import PostComponent from "./Post";
-import Post from "../typings"
+import { Post } from "../typings";
 
 type Props = {
   topic?: string;
